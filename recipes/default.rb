@@ -19,6 +19,6 @@ node[:log_rotations].each do |log|
     rotate log[:rotate] || 30
     create log[:create] || "644 root root"
     sharedscripts log[:sharedscripts] || false
-    postrotate log[:postrotate] unless log[:postrotate].empty?
+    postrotate log[:postrotate] unless log[:postrotate].nil?
   end
 end
