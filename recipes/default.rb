@@ -18,5 +18,7 @@ node[:log_rotations].each do |log|
     frequency log[:frequency] || "weekly"
     rotate log[:rotate] || 30
     create log[:create] || "644 root root"
+    sharedscripts log[:sharedscripts] || false
+    postrotate log[:postrotate] unless log[:postrotate].empty?
   end
 end
