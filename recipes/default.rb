@@ -15,6 +15,7 @@ node[:log_rotations].each do |log|
     path log[:path]
     template log[:template] || "logrotate.erb"
     cookbook log[:cookbook] || "logrotate"
+    options log[:options] || ["missingok", "compress", "delaycompress", "copytruncate", "notifempty"]
     frequency log[:frequency] || "weekly"
     rotate log[:rotate] || 30
     create log[:create] || "644 root root"
