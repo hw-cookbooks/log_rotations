@@ -17,6 +17,7 @@ node[:log_rotations].each do |log|
     cookbook log[:cookbook] || "logrotate"
     options log[:options] || ["missingok", "compress", "delaycompress", "copytruncate", "notifempty"]
     frequency log[:frequency] || "weekly"
+    size log[:size] || "10M"
     rotate log[:rotate] || 30
     create log[:create] || "644 root root"
   end
