@@ -21,5 +21,7 @@ node[:log_rotations].each do |log|
     sharedscripts   log[:sharedscripts] || false
     postrotate      log[:postrotate] unless log[:postrotate].nil?
     options log[:options] || ["missingok", "compress", "delaycompress", "copytruncate", "notifempty"]
+    template_mode   log[:template_mode] || "0644"
+    size            log[:size] || "300k"
   end
 end
