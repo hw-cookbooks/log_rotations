@@ -1,9 +1,9 @@
-node[:log_rotations].each do |log|
+node['log_rotations'].each do |log|
   log = Mash.new(log)
   skip = false
 
   %w(name path).each do |required|
-    if(log[required].to_s.empty?)
+    if log[required].to_s.empty?
       Chef::Log.warn "Log Rotations: Missing required field for log rotate: #{required}"
       skip = true
     end
@@ -13,13 +13,13 @@ node[:log_rotations].each do |log|
 
   logrotate_app log[:name] do
     path log[:path]
-    template        log[:template] || "logrotate.erb"
-    cookbook        log[:cookbook] || "logrotate"
-    frequency       log[:frequency] || "weekly"
+    template        log[:template] || 'logrotate.erb'
+    cookbook        log[:cookbook] || 'logrotate'
+    frequency       log[:frequency] || 'weekly'
     rotate          log[:rotate] || 30
-    create          log[:create] || "644 root root"
+    create          log[:create] || '644 root root'
     sharedscripts   log[:sharedscripts] || false
     postrotate      log[:postrotate] unless log[:postrotate].nil?
-    options log[:options] || ["missingok", "compress", "delaycompress", "copytruncate", "notifempty"]
+    options log[:options] || %w(missingok compress delaycompress copytruncate notifempty)
   end
 end
